@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CategoriesInterface } from "../interfaces/categories";
+import Link from "next/link";
 
 export default async function Categories() {
   const response = await fetch(
@@ -10,10 +11,12 @@ export default async function Categories() {
   return data !== null ? (
     <div className="flex overflow-x-auto">
       {data.map((e) => (
-        <div className="flex-col mr-10 ml-10" key={e.category_id}>
-          <img src={e.url} alt={"icon"} height={100} width={100} />
-          <h3>{e.name}</h3>
-        </div>
+        <Link key={e.category_id} href={`/myShop/${e.category_id}`}>
+          <div className="flex-col mr-10 ml-10" key={e.category_id}>
+            <img src={e.url} alt={"icon"} height={50} width={50} />
+            <h3>{e.name}</h3>
+          </div>
+        </Link>
       ))}
     </div>
   ) : (

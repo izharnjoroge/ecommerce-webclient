@@ -1,6 +1,7 @@
 import React from "react";
 import Carousels from "../components/carousels";
 import Categories from "../components/categories";
+import Product from "../components/product";
 
 export default function MyShop() {
   const imagesList = [
@@ -22,11 +23,14 @@ export default function MyShop() {
     },
   ];
   return (
-    <div className="w-full h-[100vh]">
+    <div className="w-full h-[100dvh]">
       <div className="mb-10">
         <Carousels images={imagesList} />
       </div>
-      <Categories />
+      <div className="mb-10">
+        <Categories />
+      </div>
+      <Product />
     </div>
   );
 }

@@ -6,7 +6,7 @@ export default function NavBar() {
   const pathname = usePathname();
   return (
     <header
-      className={`flex w-[full] justify-between  bg-slate-100 ${
+      className={`flex w-[full] justify-between  bg-slate-100 sticky top-0 left-0 ${
         pathname === "/" ? "hidden" : ""
       }`}
     >

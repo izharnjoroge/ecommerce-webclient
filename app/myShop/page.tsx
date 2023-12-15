@@ -23,14 +23,22 @@ export default function MyShop() {
     },
   ];
   return (
-    <div className="w-full h-[100dvh]">
-      <div className="mb-10">
+    <div className="w-full h-[100dvh] ml">
+      <section className="mb-10">
         <Carousels images={imagesList} />
-      </div>
-      <div className="mb-10">
-        <Categories />
-      </div>
-      <Product />
+      </section>
+      <section>
+        <h1 className="text-2xl text-purple-600 font-bold ml-8 mb-4">
+          Categories
+        </h1>
+        <div className="mb-10">
+          <Categories />
+        </div>
+      </section>
+      <section>
+        <h1 className="text-2xl text-purple-600 font-bold ml-8">Popular</h1>
+        <Product />
+      </section>
     </div>
   );
 }

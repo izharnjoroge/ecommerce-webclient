@@ -14,18 +14,12 @@ export default async function Product() {
         <div className="grid grid-cols-4">
           {products?.map((product) => (
             <div
-              className="col-span-1 max-h-[200px] relative gap-10 p-10"
+              className="col-span-1 h-auto w-auto p-10 "
               key={product.item_id}
             >
-              <img src={product.image} height={150} />
-              <h1 className="text-xl text-black">{product.name}</h1>
-              <p className="text-gray-400">{product.description}</p>
-              <div className="w-full flex justify-between ">
-                <div className="top-[200px] left-0 text-green-700 ">
-                  <h3>{product.amount}</h3>
-                </div>
-                <div className="text-purple-700 top-0 right-0">
-                  <Link href={"/myShop/cart"}>
+              <div className="bg-zinc-100  relative">
+                <div className="flex w-[full] mb-5 ml-2 mr-2 justify-between">
+                  <Link href={"/myShop/cart"} className="">
                     <Image
                       src={"/cart.svg"}
                       alt={"cart"}
@@ -33,10 +27,17 @@ export default async function Product() {
                       height={30}
                     />
                   </Link>
+
+                  <div className="flex h-[30px] w-[30px] bg-purple-500 text-white rounded-md text-xl justify-center">
+                    <h3 className="">{product.rating}</h3>
+                  </div>
                 </div>
-              </div>
-              <div className="text-purple-700 top-0 right-0 absolute">
-                <h3>{product.rating}</h3>
+                <img src={product.image} height={150} />
+                <div className="flex flex-col items-center justify-center">
+                  <h1 className="text-xl text-black">{product.name}</h1>
+                  <p className="text-gray-400">{product.description}</p>
+                  <h3 className="text-green-600 mt-5">{product.amount}</h3>
+                </div>
               </div>
             </div>
           ))}

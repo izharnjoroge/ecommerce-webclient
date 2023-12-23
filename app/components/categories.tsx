@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 import { CategoriesInterface } from "../interfaces/categories";
 import Link from "next/link";
 
-export default async function Categories() {
+export default async function CategoriesComponent() {
   const pathname = usePathname();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/categories?apikey=${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`

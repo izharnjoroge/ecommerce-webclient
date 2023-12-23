@@ -1,7 +1,7 @@
 import React from "react";
 import Carousels from "../components/carousels";
-import Categories from "../components/categories";
 import Product from "../components/product";
+import CategoriesComponent from "../components/categories";
 
 export default function MyShop() {
   const imagesList = [
@@ -23,7 +23,7 @@ export default function MyShop() {
     },
   ];
   return (
-    <div className="w-full h-[100dvh] ml">
+    <main className="w-full h-[100dvh] ml">
       <section className="mb-10">
         <Carousels images={imagesList} />
       </section>
@@ -32,13 +32,13 @@ export default function MyShop() {
           Categories
         </h1>
         <div className="mb-10">
-          <Categories />
+          <CategoriesComponent />
         </div>
       </section>
       <section>
         <h1 className="text-2xl text-purple-600 font-bold ml-8">Popular</h1>
         <Product />
       </section>
-    </div>
+    </main>
   );
 }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ProductInterface } from "@/app/interfaces/product";
-import CategoriesComponent from "@/app/components/categories";
+import { ProductInterface } from "@/src/interfaces/product";
+import CategoriesComponent from "@/src/components/categories";
 
 type CategoryPageProps = {
   params: {

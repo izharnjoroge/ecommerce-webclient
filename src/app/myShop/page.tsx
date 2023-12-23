@@ -1,7 +1,7 @@
 import React from "react";
-import Carousels from "../components/carousels";
-import Product from "../components/product";
-import CategoriesComponent from "../components/categories";
+import Carousels from "../../components/carousels";
+import Product from "../../components/product";
+import CategoriesComponent from "../../components/categories";
 
 export default function MyShop() {
   const imagesList = [

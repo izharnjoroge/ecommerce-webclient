@@ -1,4 +1,13 @@
+"use client";
+
 import { ImageInterface } from "../interfaces/carousels";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "./ui/carousel";
 
 type ImageCarousels = {
   images: ImageInterface[];

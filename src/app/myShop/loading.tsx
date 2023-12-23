@@ -1,5 +1,6 @@
-import React from "react";
+"use client";
+import { Skeleton } from "@/src/components/ui/skeleton";
 
 export default function loading() {
-  return <div>loading .....</div>;
+  return <Skeleton className="w-[100px] h-[20px] rounded-full" />;
 }

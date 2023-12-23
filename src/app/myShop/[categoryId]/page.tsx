@@ -32,30 +32,29 @@ export default async function categories({ params }: CategoryPageProps) {
           <div className="grid grid-cols-4">
             {CategoryProducts.map((product) => (
               <div
-                className="col-span-1 h-auto w-auto  gap-10 p-10 "
+                className="h-[500px] p-10 overflow-auto"
                 key={product.item_id}
               >
                 <div className="bg-zinc-100  relative">
-                  <img src={product.image} height={150} className="mt-10" />
-                  <div className="flex flex-col items-center justify-center">
-                    <h1 className="text-xl text-black">{product.name}</h1>
-                    <p className="text-gray-400">{product.description}</p>
-                    <h3>{product.amount}</h3>
-                    <div className="w-full flex justify-end">
-                      <div className="text-purple-700 top-0 right-0">
-                        <Link href={"/myShop/cart"}>
-                          <Image
-                            src={"/cart.svg"}
-                            alt={"cart"}
-                            width={30}
-                            height={30}
-                          />
-                        </Link>
-                      </div>
+                  <div className="flex w-[full] mb-5 ml-2 mr-2 justify-between">
+                    <Link href={"/myShop/cart"} className="">
+                      <Image
+                        src={"/cart.svg"}
+                        alt={"cart"}
+                        width={30}
+                        height={30}
+                      />
+                    </Link>
+
+                    <div className="flex h-[30px] w-[30px] bg-purple-500 text-white rounded-md text-xl justify-center">
+                      <h3 className="">{product.rating}</h3>
                     </div>
-                    <h3 className="text-purple-700 top-0 text-xl right-0 absolute">
-                      {product.rating}
-                    </h3>
+                  </div>
+                  <img src={product.image} height={150} />
+                  <div className=" overflow-auto">
+                    <h1 className="text-xl text-black">{product.name}</h1>
+                    <p className="text-gray-400 ">{product.description}</p>
+                    <h3 className="text-green-600 mt-5">{product.amount}</h3>
                   </div>
                 </div>
               </div>

@@ -1,7 +1,8 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { CategoriesInterface } from "../interfaces/categories";
+
 import Link from "next/link";
+import { CategoriesInterface } from "@/src/interfaces/categories";
 
 export default async function CategoriesComponent() {
   const pathname = usePathname();

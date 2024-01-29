@@ -1,5 +1,5 @@
-import Container from "@/src/components/container";
-import NavBar from "@/src/components/navBar";
+import Container from "@/src/components/reusables/container";
+import NavBar from "@/src/components/reusables/navBar";
 
 export default function RootLayout({
   children,

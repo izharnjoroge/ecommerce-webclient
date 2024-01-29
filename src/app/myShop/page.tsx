@@ -1,7 +1,7 @@
+import Carousels from "@/src/components/reusables/carousels";
+import CategoriesComponent from "@/src/components/reusables/categories";
+import Product from "@/src/components/reusables/product";
 import React from "react";
-import Carousels from "../../components/carousels";
-import Product from "../../components/product";
-import CategoriesComponent from "../../components/categories";
 
 export default function MyShop() {
   const imagesList = [
@@ -25,13 +25,13 @@ export default function MyShop() {
   return (
     <main className="w-full h-[100dvh] ">
       <section className="mb-2 md:mb-10 w-full h-[220px] md:h-[330px]">
-        <Carousels images={imagesList} />
+        <Carousels />
       </section>
       <section>
         <h1 className="text-2xl text-purple-600 font-bold  ml-1 md:ml-8 mb-2 md:mb-4">
           Categories
         </h1>
-        <div className="mg-3 md:mb-10">
+        <div className="mb-3 md:mb-10 ml-1 md:ml-8">
           <CategoriesComponent />
         </div>
       </section>
@@ -39,7 +39,9 @@ export default function MyShop() {
         <h1 className="text-2xl text-purple-600 font-bold ml-1 md:ml-8">
           Popular
         </h1>
-        <Product />
+        <div className="ml-1 md:ml-8">
+          <Product />
+        </div>
       </section>
     </main>
   );

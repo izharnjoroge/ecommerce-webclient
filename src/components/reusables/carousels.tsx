@@ -13,11 +13,11 @@ export default async function Carousels() {
   return images !== null ? (
     <div className="flex overflow-x-auto">
       {images.map((image) => (
-        <div
-          key={image.id}
-          className=" flex-none h-[200px] w-[300px] md:h-[300px] md:w-fit md:mr-2 md:ml-2"
-        >
-          <img src={image.url} className="" />
+        <div key={image.id} className=" flex-none  md:mr-2 md:ml-2 ">
+          <img
+            src={image.url}
+            className="h-[200px] w-[300px] md:h-[350px] md:w-fit aspect-video"
+          />
         </div>
       ))}
     </div>

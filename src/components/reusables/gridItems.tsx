@@ -1,4 +1,6 @@
+"use client";
 import { ProductInterface } from "@/src/interfaces/product";
+import useStore from "@/src/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,6 +9,8 @@ interface GridItemsProps {
 }
 
 export function GridItems({ products }: GridItemsProps) {
+  const { addItems } = useStore();
+
   return (
     <section className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 ml-1 mr-1">
       {products.map((product) => (
@@ -15,9 +19,9 @@ export function GridItems({ products }: GridItemsProps) {
           key={product.item_id}
         >
           <div className="flex w-[full] mb-2 mt-1  md:mb-5 ml-2 mr-2 justify-between">
-            <Link href={"/myShop/cart"} className="">
+            <button onClick={() => addItems(product)}>
               <Image src={"/cart.svg"} alt={"cart"} width={30} height={30} />
-            </Link>
+            </button>
 
             <div className="flex h-[20px] w-[20px] md:h-[30px] md:w-[30px] bg-purple-500 text-white rounded-md text-sm md:text-xl justify-center">
               <h3 className="">{product.rating}</h3>
@@ -29,7 +33,7 @@ export function GridItems({ products }: GridItemsProps) {
             <h1 className="text-sm md:text-xl font-bold text-black ">
               {product.name}
             </h1>
-            <div className="h-[100px] md:h-[100px] overflow-auto">
+            <div className="h-[50px] md:h-[50px] overflow-y-auto">
               <p className="text-black ">{product.description}</p>
             </div>
             <h3 className="text-sm md:text-xl mb-1 md:mb-3 text-green-600 md:mt-2">

@@ -14,9 +14,9 @@ export default function NavBar() {
         <Link href={"/"}>
           <Image src={"/shop.jpeg"} alt="logo" height={100} width={80} />
         </Link>
-        <h1 className="ml-8 justify-center">SupaBase Ecommerce Client Next</h1>
+        <h1 className="ml-3 md:ml-8 justify-center">SupaBase Ecommerce </h1>
       </section>
-      <ul className="flex w-1/6 justify-between items-center mr-8">
+      <ul className="flex w-1/6 md:w-1/6 justify-between items-center md:mr-8 gap-2">
         <li>
           <Link href={"/myShop"}>
             <Image src={"/shop.svg"} alt={"Cart"} height={50} width={50} />

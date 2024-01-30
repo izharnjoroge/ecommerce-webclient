@@ -1,9 +1,15 @@
 "use client";
+
+import useCartStore from "@/src/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 export default function NavBar() {
   const pathname = usePathname();
+  const { items } = useCartStore();
+  const cartItems = items.length;
+
   return (
     <header
       className={`flex w-[full] justify-between  bg-slate-100 sticky top-0 left-0 ${
@@ -24,7 +30,12 @@ export default function NavBar() {
         </li>
         <li>
           <Link href={"myShop/cart"}>
-            <Image src={"/cart.svg"} alt={"Cart"} height={50} width={50} />
+            <div className="relative">
+              <div className="absolute flex top-0 right-0 rounded-full h-[20px] w-[20px] bg-red-500 items-center justify-center text-white">
+                {cartItems}
+              </div>
+              <Image src={"/cart.svg"} alt={"Cart"} height={50} width={50} />
+            </div>
           </Link>
         </li>
       </ul>

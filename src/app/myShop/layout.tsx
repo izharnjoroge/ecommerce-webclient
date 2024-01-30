@@ -1,3 +1,5 @@
+"use client";
+
 import Container from "@/src/components/reusables/container";
 import NavBar from "@/src/components/reusables/navBar";
 

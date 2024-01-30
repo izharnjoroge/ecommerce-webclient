@@ -1,6 +1,7 @@
 "use client";
+
 import { ProductInterface } from "@/src/interfaces/product";
-import useStore from "@/src/store/cartStore";
+import useCartStore from "@/src/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,7 +10,7 @@ interface GridItemsProps {
 }
 
 export function GridItems({ products }: GridItemsProps) {
-  const { addItems } = useStore();
+  const { addItems } = useCartStore();
 
   return (
     <section className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 ml-1 mr-1">
@@ -30,7 +31,7 @@ export function GridItems({ products }: GridItemsProps) {
           <div className="flex flex-col w-full justify-center">
             <img src={product.image} className="h-[100px]  md:h-[150px]" />
 
-            <h1 className="text-sm md:text-xl font-bold text-black ">
+            <h1 className="text-sm md:text-xl font-bold text-black line-clamp-1">
               {product.name}
             </h1>
             <div className="h-[50px] md:h-[50px] overflow-y-auto">

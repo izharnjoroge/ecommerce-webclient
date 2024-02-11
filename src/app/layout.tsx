@@ -6,11 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// export const metadata: Metadata = {
-//   title: "E-Commerce Web",
-//   description: "An Online Shopping Site",
-// };
-
 export default function RootLayout({
   children,
 }: {

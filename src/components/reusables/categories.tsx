@@ -23,7 +23,7 @@ export default function CategoriesComponent() {
   return (
     <div className="flex h-fit">
       {data!.map((e) => (
-        <Link key={e.category_id} href={`/myShop/${e.category_id}`}>
+        <Link key={e.category_id} href={`/myShop/Category/${e.category_id}`}>
           <div
             className={`flex flex-col items-center justify-center ml-2 mr-2 md:mr-10 md:ml-10  ${
               pathname.includes(e.category_id)

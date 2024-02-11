@@ -4,7 +4,7 @@ import { GridItems } from "@/src/components/reusables/gridItems";
 import { ErrorLoading } from "@/src/components/reusables/loading";
 import { fetchItems, fetchItemsPerCategory } from "@/src/config/functions";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../loading";
+import Loading from "../../loading";
 
 type CategoryPageProps = {
   params: {

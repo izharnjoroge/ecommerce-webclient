@@ -1,8 +1,10 @@
-import Link from "next/link";
-import Image from "next/image";
-import { ProductInterface } from "@/src/interfaces/product";
+"use client";
 import CategoriesComponent from "@/src/components/reusables/categories";
 import { GridItems } from "@/src/components/reusables/gridItems";
+import { ErrorLoading } from "@/src/components/reusables/loading";
+import { fetchItems, fetchItemsPerCategory } from "@/src/config/functions";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../loading";
 
 type CategoryPageProps = {
   params: {
@@ -10,37 +12,32 @@ type CategoryPageProps = {
   };
 };
 
-export default async function categories({ params }: CategoryPageProps) {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/items?apikey=${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-    {
-      cache: "no-store",
-    }
-  );
+export default function categories({ params }: CategoryPageProps) {
+  const {
+    isLoading,
+    isError,
+    data: CategoryProducts,
+  } = useQuery({
+    queryKey: ["categories", params.categoryId],
+    queryFn: () => fetchItemsPerCategory(params.categoryId),
+  });
 
-  const products: ProductInterface[] | null = await response.json();
-  const CategoryProducts =
-    products?.filter((product) => product.categoryId === params.categoryId) ||
-    [];
+  if (isLoading) {
+    return <Loading />;
+  }
 
-  return CategoryProducts !== null ? (
-    CategoryProducts.length > 0 ? (
-      <main>
-        <section>
-          <div className="mt-1 mb-3 md:mt-10 md:mb-10">
-            <CategoriesComponent />
-          </div>
-          <GridItems products={CategoryProducts} />
-        </section>
-      </main>
-    ) : (
-      <main>
+  if (isError) {
+    return <ErrorLoading />;
+  }
+  return CategoryProducts!.length > 0 ? (
+    <main>
+      <section>
         <div className="mt-1 mb-3 md:mt-10 md:mb-10">
           <CategoriesComponent />
         </div>
-        <div>No Products...</div>
-      </main>
-    )
+        <GridItems products={CategoryProducts!} />
+      </section>
+    </main>
   ) : (
     <main>
       <div className="mt-1 mb-3 md:mt-10 md:mb-10">

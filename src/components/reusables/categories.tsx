@@ -1,19 +1,28 @@
 "use client";
 import { usePathname } from "next/navigation";
-
 import Link from "next/link";
-import { CategoriesInterface } from "@/src/interfaces/categories";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCategories } from "@/src/config/functions";
+import { ErrorLoading, Loading } from "./loading";
 
-export default async function CategoriesComponent() {
+export default function CategoriesComponent() {
   const pathname = usePathname();
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/categories?apikey=${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`
-  );
-  const data: CategoriesInterface[] | null = await response.json();
+  const { isLoading, isError, data } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
 
-  return data !== null ? (
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <ErrorLoading />;
+  }
+
+  return (
     <div className="flex h-fit">
-      {data.map((e) => (
+      {data!.map((e) => (
         <Link key={e.category_id} href={`/myShop/${e.category_id}`}>
           <div
             className={`flex flex-col items-center justify-center ml-2 mr-2 md:mr-10 md:ml-10  ${
@@ -29,7 +38,5 @@ export default async function CategoriesComponent() {
         </Link>
       ))}
     </div>
-  ) : (
-    <div>No data</div>
   );
 }

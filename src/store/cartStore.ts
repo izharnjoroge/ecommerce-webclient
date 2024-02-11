@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { ProductInterface } from "../interfaces/product";
+import { postOrders } from "../config/functions";
 
 interface CartStore {
   items: ProductInterface[];
@@ -7,6 +8,18 @@ interface CartStore {
   removeItems: (itemId: string) => void;
   checkOut: () => void;
 }
+
+const extractNumericValue = (price: string): number => {
+  const numericValue = parseInt(price.replace(/[^0-9]/g, ""), 10);
+  return isNaN(numericValue) ? 0 : numericValue;
+};
+
+const calculateTotalAmount = (items: ProductInterface[]): number => {
+  return items.reduce(
+    (total, item) => total + extractNumericValue(item.amount),
+    0
+  );
+};
 
 const useCartStore = create<CartStore>((set) => ({
   items: [],
@@ -20,10 +33,28 @@ const useCartStore = create<CartStore>((set) => ({
       items: state.items.filter((item) => item.item_id !== itemId),
     }));
   },
-  checkOut: () => {
+  checkOut: async () => {
     set((state) => {
-      console.log("Checking out:", state.items);
-      return { items: [] }; // Clearing the items after checkout
+      const postOrder = async () => {
+        const totalAmount = calculateTotalAmount(state.items);
+
+        try {
+          const data = await postOrders({
+            completed: false,
+            amount: totalAmount,
+            items: state.items,
+          });
+          alert("Order Placed");
+          // Handle the response as needed
+        } catch (error) {
+          // Handle error
+          console.error("Error posting order:", error);
+        }
+      };
+
+      // Call the async function
+      postOrder();
+      return { items: [] };
     });
   },
 }));

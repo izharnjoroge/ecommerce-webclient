@@ -5,7 +5,7 @@ import React from "react";
 
 export default function MyShop() {
   return (
-    <main className="w-full h-[100dvh] ">
+    <main className="w-full h-full ">
       <section className="mb-2 md:mb-10 w-full h-[220px] md:h-[330px]">
         <Carousels />
       </section>

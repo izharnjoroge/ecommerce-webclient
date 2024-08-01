@@ -6,7 +6,7 @@ export async function middleware(req: NextRequest) {
 
   const checkSession = async () => {
     const { data: session, error } = await supabase.auth.getSession();
-    return session && !error;
+    return session.session && !error;
   };
 
   if (pathname.startsWith("/myShop")) {
@@ -17,9 +17,6 @@ export async function middleware(req: NextRequest) {
     }
   } else {
     const isAuthenticated = await checkSession();
-
-    console.log(isAuthenticated);
-
     if (isAuthenticated) {
       return NextResponse.redirect(new URL("/myShop", req.url));
     }

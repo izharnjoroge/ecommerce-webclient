@@ -30,15 +30,20 @@ export const AuthProvider = ({ children }: AuthenticationContextProps) => {
 
   const router = useRouter();
 
+  const checkSessionAndError = async () => {
+    const { data: session, error } = await supabase.auth.getSession();
+    return session.session && !error;
+  };
+
   const checkSession = async () => {
     try {
-      const { data: session, error } = await supabase.auth.getSession();
-      if (error) throw error;
-      if (session) {
+      const authenticated = await checkSessionAndError();
+      if (authenticated) {
         setIsAuthenticated(true);
         router.replace("/myShop");
       } else {
         setIsAuthenticated(false);
+        router.replace("/");
         setLoading(false);
       }
     } catch (error) {

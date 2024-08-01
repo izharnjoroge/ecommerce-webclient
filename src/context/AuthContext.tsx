@@ -31,8 +31,11 @@ export const AuthProvider = ({ children }: AuthenticationContextProps) => {
   const router = useRouter();
 
   const checkSessionAndError = async () => {
-    const { data: session, error } = await supabase.auth.getSession();
-    return session.session && !error;
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+    return user && !error;
   };
 
   const checkSession = async () => {
@@ -44,8 +47,8 @@ export const AuthProvider = ({ children }: AuthenticationContextProps) => {
       } else {
         setIsAuthenticated(false);
         router.replace("/");
-        setLoading(false);
       }
+      setLoading(false);
     } catch (error) {
       setIsAuthenticated(false);
       setLoading(false);

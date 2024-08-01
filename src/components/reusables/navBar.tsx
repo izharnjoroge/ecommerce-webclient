@@ -128,7 +128,7 @@ export default function NavBar() {
                     width={20}
                     className="mr-2"
                   />
-                  LogOut
+                  <Link href={"/"}>LogOut</Link>
                 </li>
               </ul>
             )}

@@ -1,10 +1,15 @@
 "use client";
 import CategoriesComponent from "@/src/components/reusables/categories";
 import { GridItems } from "@/src/components/reusables/gridItems";
-import { ErrorLoading } from "@/src/components/reusables/loading";
-import { fetchItems, fetchItemsPerCategory } from "@/src/config/functions";
+import {
+  ProductLoading,
+  ErrorLoading,
+} from "@/src/components/reusables/loading";
+import { fetchItemsPerCategory } from "@/src/config/functions";
+import { ProductInterface } from "@/src/interfaces/product";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../../loading";
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 type CategoryPageProps = {
   params: {
@@ -12,30 +17,71 @@ type CategoryPageProps = {
   };
 };
 
-export default function categories({ params }: CategoryPageProps) {
-  const {
-    isLoading,
-    isError,
-    data: CategoryProducts,
-  } = useQuery({
-    queryKey: ["categories", params.categoryId],
-    queryFn: () => fetchItemsPerCategory(params.categoryId),
+export default function Categories({ params }: CategoryPageProps) {
+  const [items, setItems] = useState(10);
+  const [hasMore, setHasMore] = useState(true);
+  const [categoryProducts, setCategoryProducts] = useState<ProductInterface[]>(
+    []
+  );
+  const [initialLoading, setInitialLoading] = useState(true);
+
+  const { isLoading, isError, isFetching, data } = useQuery({
+    queryKey: ["categories", params.categoryId, items],
+    queryFn: () => fetchItemsPerCategory(params.categoryId, items),
+    enabled: !!items,
   });
 
-  if (isLoading) {
-    return <Loading />;
+  useEffect(() => {
+    if (data) {
+      setCategoryProducts((prevProducts) => {
+        const newProducts = [...prevProducts, ...data];
+        setHasMore(data.length % 10 === 0 && data.length !== 0);
+        return newProducts;
+      });
+      setInitialLoading(false);
+    }
+  }, [data]);
+
+  const fetchMoreData = () => {
+    if (!isFetching && !isLoading) {
+      setItems((prevItems) => prevItems + 10);
+    }
+  };
+
+  if (initialLoading && isLoading) {
+    return (
+      <main className="mb-5 mt-2">
+        <section>
+          <div className="mt-1 mb-3 md:mt-10 md:mb-10">
+            <CategoriesComponent />
+          </div>
+          <div>
+            <ProductLoading />
+          </div>
+        </section>
+      </main>
+    );
   }
 
   if (isError) {
     return <ErrorLoading />;
   }
-  return CategoryProducts!.length > 0 ? (
-    <main>
+
+  return categoryProducts && categoryProducts.length > 0 ? (
+    <main className="mb-5 mt-2">
       <section>
         <div className="mt-1 mb-3 md:mt-10 md:mb-10">
           <CategoriesComponent />
         </div>
-        <GridItems products={CategoryProducts!} />
+        <InfiniteScroll
+          dataLength={categoryProducts.length}
+          next={fetchMoreData}
+          hasMore={hasMore}
+          loader={<ProductLoading />} // Loader for subsequent loads
+          endMessage={<p>No more products</p>}
+        >
+          <GridItems products={categoryProducts} />
+        </InfiniteScroll>
       </section>
     </main>
   ) : (

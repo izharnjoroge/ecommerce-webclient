@@ -3,9 +3,5 @@ type ContainerProps = {
 };
 
 export default function Container({ children }: ContainerProps) {
-  return (
-    <div className="max-w-[1200px] mx-auto bg-white min-h-screen flex flex-col">
-      {children}
-    </div>
-  );
+  return <div className="">{children}</div>;
 }

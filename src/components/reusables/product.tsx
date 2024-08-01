@@ -2,7 +2,7 @@
 import { GridItems } from "./gridItems";
 import { fetchCarousels, fetchItems } from "@/src/config/functions";
 import { useQuery } from "@tanstack/react-query";
-import { Loading, ErrorLoading } from "./loading";
+import { ProductLoading, ErrorLoading } from "./loading";
 
 export default function Product() {
   const {
@@ -15,7 +15,7 @@ export default function Product() {
   });
 
   if (isLoading) {
-    return <Loading />;
+    return <ProductLoading />;
   }
 
   if (isError) {

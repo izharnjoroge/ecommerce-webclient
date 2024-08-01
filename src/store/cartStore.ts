@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { ProductInterface } from '../interfaces/product';
-import { postOrders } from '../config/functions';
+import { create } from "zustand";
+import { ProductInterface } from "../interfaces/product";
+import { postOrders } from "../config/functions";
 
 export interface CartItems extends ProductInterface {
   total: number;
@@ -12,19 +12,25 @@ interface CartStore {
   area: string;
   street: string;
   description: string;
+  userId: string;
   addItems: (item: CartItems) => void;
   removeItems: (itemId: string) => void;
   updateTotalAndAmount: (itemId: string, newTotal: number) => void;
-  locationDetails: (area: string, street: string, description: string) => void;
+  locationDetails: (
+    area: string,
+    street: string,
+    description: string,
+    userId: string
+  ) => void;
   checkOut: () => void;
 }
 
 export const extractNumericValue = (price: string): number => {
-  const numericValue = parseInt(price.replace(/[^0-9]/g, ''), 10);
+  const numericValue = parseInt(price.replace(/[^0-9]/g, ""), 10);
   return isNaN(numericValue) ? 0 : numericValue;
 };
 
-const calculateTotalAmount = (items: CartItems[]): number => {
+export const calculateTotalAmount = (items: CartItems[]): number => {
   return items.reduce(
     (total, item) => total + extractNumericValue(item.newAmount),
     0
@@ -33,9 +39,10 @@ const calculateTotalAmount = (items: CartItems[]): number => {
 
 const useCartStore = create<CartStore>((set) => ({
   items: [],
-  area: '',
-  street: '',
-  description: '',
+  area: "",
+  street: "",
+  description: "",
+  userId: "",
   addItems: (item) => {
     set((state) => {
       const existingItemIndex = state.items.findIndex(
@@ -79,11 +86,12 @@ const useCartStore = create<CartStore>((set) => ({
       return { items: updatedItems };
     });
   },
-  locationDetails: async (area, street, description) => {
+  locationDetails: async (area, street, description, userId) => {
     set((state) => ({
       area: area,
       street: street,
       description: description,
+      userId: userId,
     }));
   },
   removeItems: (itemId) => {
@@ -106,12 +114,12 @@ const useCartStore = create<CartStore>((set) => ({
             completed: false,
             amount: totalAmount,
             items: state.items,
+            user_id: state.userId,
           });
-          alert('Order Placed');
+          alert("Order Placed");
           // Handle the response as needed
         } catch (error) {
-          // Handle error
-          console.error('Error posting order:', error);
+          alert("Error posting order");
         }
       };
 

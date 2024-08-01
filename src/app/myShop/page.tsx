@@ -18,7 +18,7 @@ export default function MyShop() {
         </div>
       </section>
       <section>
-        <h1 className="text-2xl text-purple-600 font-bold ml-1 md:ml-8">
+        <h1 className="text-2xl text-purple-600 font-bold ml-1 mb-3 md:ml-8">
           Popular
         </h1>
         <div className="ml-1 md:ml-8">

@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center  p-5">
       <div className="w-full max-w-4xl md:grid md:grid-cols-2 md:gap-8 h-screen mb-2">
-        <div className="hidden md:flex justify-center mb-2 md:mb-0 ">
+        <div className="flex justify-center mb-2 md:mb-0 ">
           <Lottie
             animationData={loginLottie}
             loop={true}

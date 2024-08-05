@@ -47,8 +47,8 @@ export const AuthProvider = ({ children }: AuthenticationContextProps) => {
       } else {
         setIsAuthenticated(false);
         router.replace("/");
+        setLoading(false);
       }
-      setLoading(false);
     } catch (error) {
       setIsAuthenticated(false);
       setLoading(false);

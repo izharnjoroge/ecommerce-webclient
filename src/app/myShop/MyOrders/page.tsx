@@ -34,6 +34,8 @@ export default function MyOrders() {
     setSelectedOrder(null);
   };
 
+  console.log(data);
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold text-purple-600 mb-4">My Orders</h1>
@@ -49,7 +51,7 @@ export default function MyOrders() {
               {new Date(order.created_at).toLocaleDateString("en-GB")}
             </p>
             <p>
-              <strong>Completed:</strong> {order.completed ? "Yes" : "No"}
+              <strong>Delivered:</strong> {order.completed ? "Yes" : "No"}
             </p>
             <p>
               <strong>Amount:</strong> KSH {order.amount}
@@ -73,6 +75,9 @@ export default function MyOrders() {
                   </p>
                   <p>
                     <strong>Amount:</strong> {item.amount}
+                  </p>
+                  <p>
+                    <strong>Number Of Items:</strong> {item.total ?? 1}
                   </p>
                 </li>
               ))}

@@ -7,4 +7,5 @@ export interface ProductInterface {
   amount: string;
   rating: string;
   categoryId: string;
+  total?: string;
 }

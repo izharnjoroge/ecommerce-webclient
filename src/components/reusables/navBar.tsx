@@ -44,13 +44,19 @@ export default function NavBar() {
 
   return (
     <header
-      className={`flex w-full justify-between bg-slate-100 sticky top-0 left-0 mb-2 z-10 ${
+      className={`flex w-full justify-between bg-slate-100 sticky top-0 left-0 mb-5 z-10 h-[60px] ${
         pathname === "/" ? "hidden" : ""
       }`}
     >
       <section className="flex items-center px-2">
         <Link href={`${BASE_URL}`} className="">
-          <Image src={"/trLogo.png"} alt="logo" height={100} width={80} />
+          <Image
+            src={"/trLogo.png"}
+            alt="logo"
+            height={100}
+            width={80}
+            className="h-[60px] w-[60px]"
+          />
         </Link>
         <h1 className="ml-2 md:ml-8 justify-center font-bold leading-3 text-[20px]">
           Metalle Mart

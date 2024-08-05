@@ -45,7 +45,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex w-full md:items-center md:justify-center ">
+    <section className="flex w-full md:items-center md:justify-center ">
       <form onSubmit={handleSubmit} className="w-full">
         <div className="mb-4">
           <label
@@ -63,17 +63,17 @@ export default function Login() {
               setEmail(e.target.value);
               setError("");
             }}
-            className="bg-inherit w-full px-3 py-1 border-b border-purple-500 focus:outline-none focus:border-purple-700 focus:border-b-2"
+            className="bg-inherit w-full px-3 py-1 border-b  border-purple-500 focus:outline-none focus:border-purple-700 focus:border-b-2"
           />
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </div>
         <button
           type="submit"
-          className="w-[100px] bg-purple-600 text-white font-bold py-2  hover:bg-purple-700 transition duration-200 rounded-2xl"
+          className="w-[100px] bg-purple-600 text-white font-[500]  py-2  hover:bg-purple-700 transition duration-200 rounded-2xl"
         >
           Continue
         </button>
       </form>
-    </div>
+    </section>
   );
 }

@@ -143,11 +143,11 @@ export default function UserSettings() {
   const selectedArea = data?.find((area) => area.area === formData.area);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center p-5">
       <h2 className="text-2xl font-bold text-purple-600 mb-6 text-center">
         Settings
       </h2>
-      <form onSubmit={handleSubmit} className="w-[300px] md:w-[500px] mb-3">
+      <form onSubmit={handleSubmit} className="w-full md:w-[500px] mb-3">
         <div className="mb-4">
           <label htmlFor="username" className="block text-purple-700 mb-2">
             Username
@@ -205,7 +205,7 @@ export default function UserSettings() {
             name="area"
             value={formData.area}
             onChange={handleChange}
-            className="w-full px-3 py-2 border-b-2 border-purple-500 focus:outline-none focus:border-purple-700"
+            className="w-full px-3 py-2 bg-transparent border-b-2 border-purple-500 focus:outline-none focus:border-purple-700"
           >
             <option value="">Select an area</option>
             {data?.map((area) => (
@@ -228,7 +228,7 @@ export default function UserSettings() {
               name="street"
               value={formData.street}
               onChange={handleChange}
-              className="w-full px-3 py-2 border-b-2 border-purple-500 focus:outline-none focus:border-purple-700"
+              className="w-full px-3 py-2 bg-transparent border-b-2 border-purple-500 focus:outline-none focus:border-purple-700"
             >
               <option value="">Select a street</option>
               {selectedArea.streets.map((street) => (
@@ -249,17 +249,8 @@ export default function UserSettings() {
           Update
         </button>
       </form>
-      {/* <button
-          type="submit"
-          onClick={() => {
-            deleteAccount();
-          }}
-          className="w-[300px] md:w-[500px] bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-200"
-        >
-          Delete Account
-        </button> */}
 
-      <AlertDialog>
+      {/* <AlertDialog>
         <AlertDialogTrigger asChild>
           <button className="w-[300px] md:w-[500px] bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-200">
             Delete Account
@@ -284,7 +275,7 @@ export default function UserSettings() {
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
-      </AlertDialog>
+      </AlertDialog> */}
     </div>
   );
 }

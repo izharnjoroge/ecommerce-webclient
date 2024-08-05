@@ -42,7 +42,17 @@ export default function SignUp() {
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === "area") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+        street: "",
+      }));
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+
     setErrors({ ...errors, [name]: "" });
   };
 
@@ -82,8 +92,6 @@ export default function SignUp() {
       } catch (error) {
         toast.error("An Error Occurred: Please Try Again");
       }
-
-      setLoading(false);
     }
   };
 
@@ -98,130 +106,128 @@ export default function SignUp() {
   const selectedArea = data?.find((area) => area.area === formData.area);
 
   return (
-    <div className="">
-      <div className="">
-        <h2 className="text-2xl font-bold text-purple-600 mb-6 text-center">
-          Sign Up
-        </h2>
-        <form onSubmit={handleSubmit} className="w-full">
+    <section className="flex flex-col w-full">
+      <h2 className="text-2xl font-bold text-purple-600 mb-6 text-center">
+        Sign Up
+      </h2>
+      <form onSubmit={handleSubmit} className="w-full mb-5">
+        <div className="mb-4">
+          <label htmlFor="username" className="block text-purple-700 mb-2">
+            Username
+          </label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
+          />
+          {errors.username && (
+            <p className="text-red-500 text-sm mt-2">{errors.username}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-purple-700 mb-2">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-2">{errors.email}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label htmlFor="phone" className="block text-purple-700 mb-2">
+            Phone
+          </label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
+          />
+          {errors.phone && (
+            <p className="text-red-500 text-sm mt-2">{errors.phone}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label htmlFor="area" className="block text-purple-700 mb-2">
+            Area
+          </label>
+          <select
+            id="area"
+            name="area"
+            value={formData.area}
+            onChange={handleChange}
+            className="w-full px-3 py-2 bg-transparent border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
+          >
+            <option value="">Select an area</option>
+            {data?.map((area) => (
+              <option key={area.id} value={area.area}>
+                {area.area}
+              </option>
+            ))}
+          </select>
+          {errors.area && (
+            <p className="text-red-500 text-sm mt-2">{errors.area}</p>
+          )}
+        </div>
+        {selectedArea && (
           <div className="mb-4">
-            <label htmlFor="username" className="block text-purple-700 mb-2">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
-            />
-            {errors.username && (
-              <p className="text-red-500 text-sm mt-2">{errors.username}</p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-purple-700 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-2">{errors.email}</p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label htmlFor="phone" className="block text-purple-700 mb-2">
-              Phone
-            </label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
-            />
-            {errors.phone && (
-              <p className="text-red-500 text-sm mt-2">{errors.phone}</p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label htmlFor="area" className="block text-purple-700 mb-2">
-              Area
+            <label htmlFor="street" className="block text-purple-700 mb-2">
+              Street
             </label>
             <select
-              id="area"
-              name="area"
-              value={formData.area}
+              id="street"
+              name="street"
+              value={formData.street}
               onChange={handleChange}
-              className="w-full px-3 py-2 border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
+              className="w-full px-3 py-2 bg-transparent border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
             >
-              <option value="">Select an area</option>
-              {data?.map((area) => (
-                <option key={area.id} value={area.area}>
-                  {area.area}
+              <option value="">Select a street</option>
+              {selectedArea.streets.map((street) => (
+                <option key={street} value={street}>
+                  {street}
                 </option>
               ))}
             </select>
-            {errors.area && (
-              <p className="text-red-500 text-sm mt-2">{errors.area}</p>
+            {errors.street && (
+              <p className="text-red-500 text-sm mt-2">{errors.street}</p>
             )}
           </div>
-          {selectedArea && (
-            <div className="mb-4">
-              <label htmlFor="street" className="block text-purple-700 mb-2">
-                Street
-              </label>
-              <select
-                id="street"
-                name="street"
-                value={formData.street}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
-              >
-                <option value="">Select a street</option>
-                {selectedArea.streets.map((street) => (
-                  <option key={street} value={street}>
-                    {street}
-                  </option>
-                ))}
-              </select>
-              {errors.street && (
-                <p className="text-red-500 text-sm mt-2">{errors.street}</p>
-              )}
-            </div>
+        )}
+        <div className="mb-4">
+          <label htmlFor="password" className="block text-purple-700 mb-2">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
+          />
+          {errors.password && (
+            <p className="text-red-500 text-sm mt-2">{errors.password}</p>
           )}
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-purple-700 mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border-b focus:border-b-2  border-purple-500 focus:outline-none focus:border-purple-700"
-            />
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-2">{errors.password}</p>
-            )}
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-200"
-          >
-            Register
-          </button>
-        </form>
-      </div>
-    </div>
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-200"
+        >
+          Register
+        </button>
+      </form>
+    </section>
   );
 }

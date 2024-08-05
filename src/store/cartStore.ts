@@ -3,7 +3,6 @@ import { ProductInterface } from "../interfaces/product";
 import { postOrders } from "../config/functions";
 
 export interface CartItems extends ProductInterface {
-  total: number;
   newAmount: string;
 }
 

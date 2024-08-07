@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { browser } from "process";
 
 export default function NavBar() {
   const pathname = usePathname();

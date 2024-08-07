@@ -48,8 +48,8 @@ export default function VerifyOtpComponent({ email }: VerifyOtpProps) {
   }
 
   return (
-    <div className="flex md:items-center md:justify-center md:min-h-screen">
-      <div className="p-8 rounded shadow-md w-full max-w-sm">
+    <div className="flex items-center justify-center mb-5">
+      <div className="w-full max-w-sm">
         <h2 className="text-2xl font-bold text-purple-600 mb-6 text-center">
           Verify OTP
         </h2>

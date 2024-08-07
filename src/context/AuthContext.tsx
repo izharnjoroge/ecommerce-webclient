@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }: AuthenticationContextProps) => {
       data: { user },
       error,
     } = await supabase.auth.getUser();
+    console.log("user", user);
     return user && !error;
   };
 

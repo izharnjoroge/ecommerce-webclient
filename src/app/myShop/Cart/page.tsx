@@ -64,7 +64,7 @@ export default function Cart() {
             {items.map((item) => (
               <li
                 key={item.item_id}
-                className="grid grid-cols-4 md:grid-cols-6 mb-1 md:mb-5 items-end md:items-center gap-x-1 font-semibold"
+                className="grid grid-cols-4 md:grid-cols-6 mb-1 md:mb-5 items-end md:items-center gap-x-1 font-[500]"
               >
                 <div className="flex flex-col md:flex-row col-span-2 md:col-span-3 md:items-center ">
                   <img src={item.image} height={50} width={50} />
@@ -93,7 +93,7 @@ export default function Cart() {
           </ul>
           <div className="w-full md:w-[400px] flex  items-center justify-between mt-5 md:mt-10 bg-gradient-to-r from-purple-600 to-purple-500 p-2 rounded-lg text-white">
             <div className="flex flex-col items-start mb-3 md:mb-0 ">
-              <p className="text-lg font-bold">Total:</p>
+              <p className="text-lg font-[500]">Total:</p>
               <p className="text-lg font-bold">KSH {total.toLocaleString()}</p>
             </div>
             <button

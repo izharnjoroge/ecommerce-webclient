@@ -1,13 +1,20 @@
 "use client";
+
 import { ItemsToggle } from "@/src/components/reusables/ItemsToggle";
 import Spinner from "@/src/components/reusables/spinner";
 import { getUser } from "@/src/config/functions";
+import { useAuthContext } from "@/src/context/AuthContext";
 import useCartStore, { calculateTotalAmount } from "@/src/store/cartStore";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function Cart() {
+  const { loading, isAuthenticated } = useAuthContext();
+
+  const router = useRouter();
+
   const {
     items,
     removeItems,
@@ -37,7 +44,11 @@ export default function Cart() {
     }
   }, [userData]);
 
-  if (isUserLoading) {
+  if (!isAuthenticated) {
+    router.replace("/myShop/auth");
+  }
+
+  if (isUserLoading || loading) {
     return <Spinner />;
   }
 

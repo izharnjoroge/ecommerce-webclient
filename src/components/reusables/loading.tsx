@@ -33,7 +33,7 @@ export function ProductLoading() {
       {[1, 2, 3, 4].map((_, index) => (
         <div
           key={index}
-          className="animate-pulse h-[300px] md:h-[400px] rounded-xl bg-gray-300"
+          className="animate-pulse h-[200px] md:h-[300px] rounded-xl bg-gray-300"
         />
       ))}
     </div>

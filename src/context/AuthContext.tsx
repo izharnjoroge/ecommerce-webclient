@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }: AuthenticationContextProps) => {
       data: { user },
       error,
     } = await supabase.auth.getUser();
-    console.log("user", user);
     return user && !error;
   };
 
@@ -47,8 +46,8 @@ export const AuthProvider = ({ children }: AuthenticationContextProps) => {
         router.replace("/myShop");
       } else {
         setIsAuthenticated(false);
-        router.replace("/");
-        setLoading(false);
+        // router.replace("/");
+        router.replace("/myShop");
       }
     } catch (error) {
       setIsAuthenticated(false);

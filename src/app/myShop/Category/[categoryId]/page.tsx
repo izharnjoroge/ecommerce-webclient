@@ -26,7 +26,7 @@ export default function Categories({ params }: CategoryPageProps) {
   const [initialLoading, setInitialLoading] = useState(true);
 
   const { isLoading, isError, isFetching, data } = useQuery({
-    queryKey: ["categories", params.categoryId, items],
+    queryKey: ["categoriesById", params.categoryId, items],
     queryFn: () => fetchItemsPerCategory(params.categoryId, items),
     enabled: !!items,
   });
@@ -77,8 +77,8 @@ export default function Categories({ params }: CategoryPageProps) {
           dataLength={categoryProducts.length}
           next={fetchMoreData}
           hasMore={hasMore}
-          loader={<ProductLoading />} // Loader for subsequent loads
-          endMessage={<p>No more products</p>}
+          loader={<ProductLoading />}
+          endMessage={<p></p>}
         >
           <GridItems products={categoryProducts} />
         </InfiniteScroll>

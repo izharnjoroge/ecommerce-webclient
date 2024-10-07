@@ -96,7 +96,7 @@ export default function SignUp() {
   };
 
   if (isLoading || loading) {
-    return <Spinner />;
+    return <Spinner height={true} />;
   }
 
   if (isError) {

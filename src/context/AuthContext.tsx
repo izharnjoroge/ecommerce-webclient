@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import {
   createContext,
   useState,
@@ -18,6 +17,7 @@ interface AuthenticationContextValue {
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  checkSession: () => Promise<void>;
 }
 
 const AuthenticationContext = createContext<
@@ -27,8 +27,6 @@ const AuthenticationContext = createContext<
 export const AuthProvider = ({ children }: AuthenticationContextProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  const router = useRouter();
 
   const checkSessionAndError = async () => {
     const {
@@ -43,16 +41,14 @@ export const AuthProvider = ({ children }: AuthenticationContextProps) => {
       const authenticated = await checkSessionAndError();
       if (authenticated) {
         setIsAuthenticated(true);
-        router.replace("/myShop");
       } else {
         setIsAuthenticated(false);
-        router.replace("/myShop");
       }
     } catch (error) {
       setIsAuthenticated(false);
-      setLoading(false);
       toast.error("An Error Occurred.PLease check your connection");
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -64,6 +60,7 @@ export const AuthProvider = ({ children }: AuthenticationContextProps) => {
     setIsAuthenticated,
     loading,
     setLoading,
+    checkSession,
   };
 
   return (

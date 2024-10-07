@@ -17,7 +17,7 @@ export default function NavBar() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const router = useRouter();
 
-  const { loading, isAuthenticated } = useAuthContext();
+  const { loading, isAuthenticated, checkSession } = useAuthContext();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -43,7 +43,8 @@ export default function NavBar() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    router.replace("/");
+    checkSession();
+    router.replace("/myShop");
   };
 
   return (

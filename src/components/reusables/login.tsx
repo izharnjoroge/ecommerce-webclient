@@ -41,7 +41,7 @@ export default function Login() {
   }
 
   if (loading) {
-    return <Spinner />;
+    return <Spinner height={true} />;
   }
 
   return (
@@ -63,7 +63,8 @@ export default function Login() {
               setEmail(e.target.value);
               setError("");
             }}
-            className="bg-inherit w-full px-3 py-1 border-b  border-purple-500 focus:outline-none focus:border-purple-700 focus:border-b-2"
+            autoFocus={true}
+            className="bg-inherit w-full  py-1 border-b  border-purple-500 focus:outline-none focus:border-purple-700 focus:border-b-2"
           />
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </div>

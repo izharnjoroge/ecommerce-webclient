@@ -1,9 +1,19 @@
+"use client";
+
 import Carousels from "@/src/components/reusables/carousels";
 import CategoriesComponent from "@/src/components/reusables/categories";
 import Product from "@/src/components/reusables/product";
+import Spinner from "@/src/components/reusables/spinner";
+import { useAuthContext } from "@/src/context/AuthContext";
 import React from "react";
 
 export default function MyShop() {
+  const { loading } = useAuthContext();
+
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <main className="w-full h-full mb-5">
       <section className="mb-2 md:mb-10 w-full h-[220px] md:h-[330px]">

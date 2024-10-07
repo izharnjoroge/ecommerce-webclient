@@ -93,8 +93,13 @@ export async function LoginUser(email: string) {
 
 export async function VerifyOtp(email: string, token: string) {
   try {
-    await supabase.auth.verifyOtp({ email, token, type: "email" });
-    return "Success";
+    const { data, error } = await supabase.auth.verifyOtp({
+      email,
+      token,
+      type: "email",
+    });
+
+    return { data, error };
   } catch (error) {
     throw error;
   }

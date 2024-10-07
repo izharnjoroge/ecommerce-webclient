@@ -8,10 +8,11 @@ import useCartStore, {
   calculateTotalAmount,
   CartItems,
 } from "@/src/store/cartStore";
+import { User } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 function useUserDetails(
   locationDetails: (
@@ -30,15 +31,19 @@ function useUserDetails(
     queryFn: getUser,
   });
 
+  const setUserData = (userData: User) => {
+    const userId = userData.id;
+    const description =
+      (userData.user_metadata["phone"] || "") +
+      (userData.user_metadata["username"] || "");
+    const area = userData.user_metadata["area"] || "";
+    const street = userData.user_metadata["street"] || "";
+    locationDetails(area, street, description, userId);
+  };
+
   useEffect(() => {
     if (userData) {
-      const userId = userData.id;
-      const description =
-        (userData.user_metadata["phone"] || "") +
-        (userData.user_metadata["username"] || "");
-      const area = userData.user_metadata["area"] || "";
-      const street = userData.user_metadata["street"] || "";
-      locationDetails(area, street, description, userId);
+      setUserData(userData);
     }
   }, [userData]);
 

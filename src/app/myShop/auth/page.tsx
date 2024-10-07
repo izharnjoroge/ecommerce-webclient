@@ -10,7 +10,7 @@ export default function AuthPage() {
   const [login, setLogin] = useState(true);
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-5">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center px-5 py-10">
       <div className=" max-w-4xl w-full md:grid md:grid-cols-2 md:gap-8 mb-2">
         <div
           className={`${
@@ -26,7 +26,7 @@ export default function AuthPage() {
 
         <div className="flex flex-col justify-center">
           <div className="w-full ">{login ? <Login /> : <SignUp />}</div>
-          <div className="flex gap-2 justify-center">
+          <div className="flex gap-x-3 justify-start py-3">
             <div className="font-[400]">
               {login ? "Not registered? " : "Have an account? "}
             </div>

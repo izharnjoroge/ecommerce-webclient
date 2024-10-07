@@ -34,8 +34,6 @@ export default function MyOrders() {
     setSelectedOrder(null);
   };
 
-  console.log(data);
-
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold text-purple-600 mb-4">My Orders</h1>

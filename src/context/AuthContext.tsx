@@ -46,7 +46,6 @@ export const AuthProvider = ({ children }: AuthenticationContextProps) => {
         router.replace("/myShop");
       } else {
         setIsAuthenticated(false);
-        // router.replace("/");
         router.replace("/myShop");
       }
     } catch (error) {

@@ -1,6 +1,5 @@
 "use client";
 import { fetchCarousels } from "@/src/config/functions";
-import { CarouselInterface } from "@/src/interfaces/carousels";
 import { useQuery } from "@tanstack/react-query";
 import { CarouselLoading, ErrorLoading } from "./loading";
 
@@ -23,6 +22,7 @@ export default function Carousels() {
       {data!.map((image) => (
         <div className=" flex-none  md:mr-2 md:ml-2 " key={image.id}>
           <img
+            loading="lazy"
             src={image.url}
             className="h-[200px] w-[300px] md:h-[350px] md:w-fit aspect-video"
           />

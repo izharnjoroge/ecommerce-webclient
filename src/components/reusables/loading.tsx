@@ -7,7 +7,7 @@ export function Loading() {
       {[1, 2, 3, 4].map((_, index) => (
         <div
           key={index}
-          className="animate-pulse w-[80px] md:w-[200px] h-[80px] rounded-md bg-gray-300"
+          className="animate-pulse w-[80px] md:w-[200px] h-[55px] rounded-md bg-gray-300"
         ></div>
       ))}
     </div>

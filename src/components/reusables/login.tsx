@@ -23,9 +23,13 @@ export default function Login() {
       setLoading(true);
 
       try {
-        await LoginUser(email);
-        toast.success("Please Check Your Mail for the OTP");
-        setIsOtpSent(true);
+        const { data, error } = await LoginUser(email);
+        if (error !== null) {
+          toast.error(`${error?.message}`);
+        } else {
+          toast.success("Please Check Your Mail for the OTP");
+          setIsOtpSent(true);
+        }
       } catch (error) {
         toast.error("An Error Occurred: Please Try Again");
       }

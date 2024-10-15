@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { ProductInterface } from "../interfaces/product";
 import { postOrders } from "../config/functions";
+import { toast } from "react-toastify";
 
 export interface CartItems extends ProductInterface {
   newAmount: string;
@@ -115,10 +116,12 @@ const useCartStore = create<CartStore>((set) => ({
             items: state.items,
             user_id: state.userId,
           });
-          alert("Order Placed");
+          //alert("Order Placed");
+          toast.success("Order Placed");
           // Handle the response as needed
         } catch (error) {
-          alert("Error posting order");
+          //alert("Error posting order");
+          toast.error("Error posting order");
         }
       };
 

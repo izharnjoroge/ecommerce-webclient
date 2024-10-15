@@ -79,7 +79,7 @@ export default function SignUp() {
       setLoading(true);
 
       try {
-        await SignUpUser(
+        const { data, error } = await SignUpUser(
           formData.username,
           formData.email,
           formData.password,
@@ -87,8 +87,12 @@ export default function SignUp() {
           formData.street,
           formData.phone
         );
-        toast.success("Account created successfully");
-        router.replace("/myShop");
+        if (data.user === null) {
+          toast.error(`${error?.message}`);
+        } else {
+          toast.success("Account created successfully");
+          router.replace("/myShop");
+        }
       } catch (error) {
         toast.error("An Error Occurred: Please Try Again");
       }

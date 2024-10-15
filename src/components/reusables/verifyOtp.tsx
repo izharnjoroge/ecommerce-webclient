@@ -1,9 +1,10 @@
-import { VerifyOtp } from "@/src/config/functions";
+import { LoginUser, VerifyOtp } from "@/src/config/functions";
 import { useState, FormEvent, ChangeEvent } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Spinner from "./spinner";
 import { useAuthContext } from "@/src/context/AuthContext";
+import { Button } from "../ui/button";
 
 interface VerifyOtpProps {
   email: string;
@@ -33,8 +34,9 @@ export default function VerifyOtpComponent({ email }: VerifyOtpProps) {
 
       try {
         const { data, error } = await VerifyOtp(email, otp);
+
         if (data.user === null) {
-          toast.error("An Error Occurred: Wrong OTP");
+          toast.error(`${error?.message}`);
         } else {
           toast.success("Welcome Back");
           checkSession();
@@ -50,12 +52,29 @@ export default function VerifyOtpComponent({ email }: VerifyOtpProps) {
     }
   };
 
+  const handleRefresh = async () => {
+    setError("");
+    setOtp("");
+    setLoading(true);
+    try {
+      const { data, error } = await LoginUser(email);
+      if (error !== null) {
+        toast.error(`${error?.message}`);
+      } else {
+        toast.success("Please Check Your Mail for the OTP");
+      }
+    } catch (error) {
+      toast.error("An Error Occurred: Please Try Again");
+    }
+    setLoading(false);
+  };
+
   if (loading) {
     return <Spinner height={true} />;
   }
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center md:items-start md:justify-start justify-center">
       <div className="w-full max-w-sm">
         <h2 className="text-2xl font-bold text-purple-600 mb-6 text-center">
           Verify OTP
@@ -81,6 +100,15 @@ export default function VerifyOtpComponent({ email }: VerifyOtpProps) {
             Submit
           </button>
         </form>
+        <div className="flex md:gap-x-3 gap-x-1 justify-start py-3">
+          <div className="font-[400]">Didn´t receive an OTP?</div>
+          <button
+            onClick={handleRefresh}
+            className="text-purple-600 font-[500]"
+          >
+            Click here to resend
+          </button>
+        </div>
       </div>
     </div>
   );

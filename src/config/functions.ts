@@ -80,12 +80,13 @@ export async function fetchLocations() {
 
 export async function LoginUser(email: string) {
   try {
-    await supabase.auth.signInWithOtp({
+    const { data, error } = await supabase.auth.signInWithOtp({
       email: email,
       options: {
         shouldCreateUser: false,
       },
     });
+    return { data, error };
   } catch (error) {
     throw error;
   }
@@ -126,7 +127,7 @@ export async function SignUpUser(
   phone: string
 ) {
   try {
-    await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
@@ -138,6 +139,7 @@ export async function SignUpUser(
         },
       },
     });
+    return { data, error };
   } catch (error) {
     throw error;
   }

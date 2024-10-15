@@ -5,6 +5,7 @@ import SignUp from "@/src/components/reusables/signUp";
 import Lottie from "lottie-react";
 import { useState } from "react";
 import loginLottie from "../../../../public/login.json";
+import { BluetoothConnectedIcon } from "lucide-react";
 
 export default function AuthPage() {
   const [login, setLogin] = useState(true);
@@ -30,12 +31,12 @@ export default function AuthPage() {
             <div className="font-[400]">
               {login ? "Not registered? " : "Have an account? "}
             </div>
-            <div
+            <button
               onClick={() => setLogin(!login)}
               className="text-purple-600 font-[500]"
             >
               {login ? " Sign Up" : " Login"}
-            </div>
+            </button>
           </div>
         </div>
       </div>

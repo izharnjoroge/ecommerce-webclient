@@ -26,14 +26,14 @@ export function GridItems({ products }: GridItemsProps) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 ml-1 mr-1 p-2">
         {products.map((product) => (
           <div
-            className="h-[200px] md:h-[300px] px-2  bg-zinc-200 rounded-lg"
+            className="h-[200px] md:h-[300px] px-2 bg-zinc-200 hover:bg-white rounded-lg md:shadow-neumorph"
             key={product.item_id}
             onClick={() => handleOpenModal(product)}
           >
             <div className="flex w-full mb-2 mt-1 md:mb-5 px-1 justify-end ">
-              <div className="flex h-[20px] w-[20px] md:h-[30px] md:w-[30px] bg-purple-500 text-white rounded-md text-sm md:text-xl justify-center">
+              {/* <div className="flex h-[20px] w-[20px] md:h-[30px] md:w-[30px] bg-purple-500 text-white rounded-md text-sm md:text-xl justify-center">
                 <h3 className="">{product.rating}</h3>
-              </div>
+              </div> */}
             </div>
             <div className="flex flex-col w-full justify-center gap-y-3">
               <img src={product.image} className="h-[100px] md:h-[150px]" />

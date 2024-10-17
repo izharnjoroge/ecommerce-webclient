@@ -31,12 +31,12 @@ export default function Carousels() {
       const scrollPosition = scrollRef.current.scrollWidth / clonedData.length;
 
       if (currentIndex >= clonedData.length - 1) {
-        // // Reset to the actual first image (index 1) after reaching the cloned last image
-        // scrollRef.current.scrollTo({
-        //   left: scrollPosition,
-        //   behavior: "smooth",
-        // });
-        // setCurrentIndex(1); // Reset to index 1 for a continuous loop
+        // Reset to the actual first image (index 1) after reaching the cloned last image
+        scrollRef.current.scrollTo({
+          left: scrollPosition,
+          behavior: "smooth",
+        });
+        setCurrentIndex(1); // Reset to index 1 for a continuous loop
       } else {
         // Normal scrolling
         scrollRef.current.scrollTo({

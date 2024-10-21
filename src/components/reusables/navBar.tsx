@@ -3,9 +3,8 @@ import useCartStore from "@/src/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { browser } from "process";
 import { useAuthContext } from "@/src/context/AuthContext";
 
 export default function NavBar() {
@@ -16,8 +15,26 @@ export default function NavBar() {
   const [initials, setInitials] = useState("");
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const router = useRouter();
-
   const { loading, isAuthenticated, checkSession } = useAuthContext();
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -35,7 +52,7 @@ export default function NavBar() {
       }
     };
     fetchUser();
-  }, []);
+  }, [isAuthenticated]);
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -89,67 +106,72 @@ export default function NavBar() {
                 {initials}
               </div>
               {dropdownVisible && (
-                <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg py-1">
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center">
-                    <Image
-                      src="/cart.svg"
-                      alt="My Orders"
-                      height={20}
-                      width={20}
-                      className="mr-2"
-                    />
-                    <Link
-                      href={`${BASE_URL}/MyOrders`}
-                      className="w-full"
-                      onClick={toggleDropdown}
+                <div
+                  ref={dropdownRef}
+                  className="absolute z-10 right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg py-1"
+                >
+                  <ul>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center">
+                      <Image
+                        src="/cart.svg"
+                        alt="My Orders"
+                        height={20}
+                        width={20}
+                        className="mr-2"
+                      />
+                      <Link
+                        href={`${BASE_URL}/MyOrders`}
+                        className="w-full"
+                        onClick={toggleDropdown}
+                      >
+                        My Orders
+                      </Link>
+                    </li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center">
+                      <Image
+                        src="/settings.svg"
+                        alt="Settings"
+                        height={20}
+                        width={20}
+                        className="mr-2"
+                      />
+                      <Link
+                        href={`${BASE_URL}/Settings`}
+                        onClick={toggleDropdown}
+                      >
+                        Settings
+                      </Link>
+                    </li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center">
+                      <Image
+                        src="/contact.svg"
+                        alt="Contact Us"
+                        height={20}
+                        width={20}
+                        className="mr-2"
+                      />
+                      <Link
+                        href={`${BASE_URL}/ContactUs`}
+                        onClick={toggleDropdown}
+                      >
+                        Contact Us
+                      </Link>
+                    </li>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center"
+                      onClick={handleLogout}
                     >
-                      My Orders
-                    </Link>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center">
-                    <Image
-                      src="/settings.svg"
-                      alt="Settings"
-                      height={20}
-                      width={20}
-                      className="mr-2"
-                    />
-                    <Link
-                      href={`${BASE_URL}/Settings`}
-                      onClick={toggleDropdown}
-                    >
-                      Settings
-                    </Link>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center">
-                    <Image
-                      src="/contact.svg"
-                      alt="Contact Us"
-                      height={20}
-                      width={20}
-                      className="mr-2"
-                    />
-                    <Link
-                      href={`${BASE_URL}/ContactUs`}
-                      onClick={toggleDropdown}
-                    >
-                      Contact Us
-                    </Link>
-                  </li>
-                  <li
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center"
-                    onClick={handleLogout}
-                  >
-                    <Image
-                      src="/logout.svg"
-                      alt="LogOut"
-                      height={20}
-                      width={20}
-                      className="mr-2"
-                    />
-                    <Link href={"/"}>LogOut</Link>
-                  </li>
-                </ul>
+                      <Image
+                        src="/logout.svg"
+                        alt="LogOut"
+                        height={20}
+                        width={20}
+                        className="mr-2"
+                      />
+                      <Link href={"/"}>LogOut</Link>
+                    </li>
+                  </ul>
+                </div>
               )}
             </li>
           )}

@@ -29,7 +29,7 @@ export function CarouselLoading() {
 
 export function ProductLoading() {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5  mt-2">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 p-2  mt-2">
       {[1, 2, 3, 4].map((_, index) => (
         <div
           key={index}

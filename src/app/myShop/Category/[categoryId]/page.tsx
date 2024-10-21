@@ -74,7 +74,7 @@ export default function Categories({ params }: CategoryPageProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const { isLoading, isError, isFetching, data } = useQuery({
-    queryKey: ["categoriesById", params.categoryId, state.items],
+    queryKey: ["categoriesById", params.categoryId],
     queryFn: () => fetchItemsPerCategory(params.categoryId, state.items),
     enabled: !!state.items,
   });
@@ -110,7 +110,7 @@ export default function Categories({ params }: CategoryPageProps) {
           <div className="mt-1 mb-3 md:mt-10 md:mb-10">
             <CategoriesComponent />
           </div>
-          <div className="px-1 md:px-3">
+          <div className="p-2">
             <div className=" mb-5">
               <Input
                 type="text"
@@ -137,8 +137,8 @@ export default function Categories({ params }: CategoryPageProps) {
         <div className="mt-1 mb-3 md:mt-10 md:mb-10">
           <CategoriesComponent />
         </div>
-        <div className="">
-          <div className="p-2 mb-5">
+        <div className="p-2 ">
+          <div className="mb-5">
             <Input
               type="text"
               className="w-full"

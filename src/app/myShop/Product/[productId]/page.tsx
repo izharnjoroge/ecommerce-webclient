@@ -71,7 +71,7 @@ const handleAddToCart = (product: ProductInterface,items: number) => {
 
   return (
     <div className="p-3 md:p-6 lg:p-0 bg-white md:w-auto">
-     <div className="flex flex-col sm:flex-row rounded-lg shadow-lg p-3 md:p-6 items-center md:items-stretch">
+     <div className="flex flex-col sm:flex-row rounded-lg sm:shadow-lg p-3 md:p-6 items-center md:items-stretch">
        {/* Image Section */}
        <div className="flex-shrink-0 md:w-1/3">
         <Image

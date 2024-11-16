@@ -1,34 +1,20 @@
 import React, { useState } from "react";
 import { ProductInterface } from "@/src/interfaces/product";
-import useCartStore, { extractNumericValue } from "@/src/store/cartStore";
-import Image from "next/image";
-import ProductModal from "./productModal";
+import  { extractNumericValue } from "@/src/store/cartStore";
+import Link from "next/link";
 
 interface GridItemsProps {
   products: ProductInterface[];
 }
 
 export function GridItems({ products }: GridItemsProps) {
-  const [selectedProduct, setSelectedProduct] =
-    useState<ProductInterface | null>(null);
-  const { addItems } = useCartStore();
-
-  const handleOpenModal = (product: ProductInterface) => {
-    setSelectedProduct(product);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProduct(null);
-  };
-
-  return (
+ return (
     <section>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 ml-1 mr-1 p-2">
         {products.map((product) => (
-          <div
+          <Link
             className="h-[200px] md:h-[300px] px-2 bg-zinc-200 hover:bg-white rounded-lg md:shadow-neumorph"
-            key={product.item_id}
-            onClick={() => handleOpenModal(product)}
+            key={product.item_id} href={`/myShop/Product/${product.item_id}`}          
           >
             <div className="flex w-full mb-2 mt-1 md:mb-5 px-1 justify-end ">
               {/* <div className="flex h-[20px] w-[20px] md:h-[30px] md:w-[30px] bg-purple-500 text-white rounded-md text-sm md:text-xl justify-center">
@@ -46,16 +32,9 @@ export function GridItems({ products }: GridItemsProps) {
                 KSH {extractNumericValue(product.amount).toLocaleString()}
               </h3>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
-      {selectedProduct && (
-        <ProductModal
-          product={selectedProduct}
-          isOpen={!!selectedProduct}
-          onRequestClose={handleCloseModal}
-        />
-      )}
     </section>
   );
 }

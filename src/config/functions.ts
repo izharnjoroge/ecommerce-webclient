@@ -35,6 +35,17 @@ export async function fetchItems() {
   }
 }
 
+
+export async function fetchItemsById(id:string) {
+  try {
+    const { data } = await supabase.from("items").select().eq("item_id",id);
+    const products: ProductInterface[] = data || [];
+    return products;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function fetchItemsPerCategory(categoryId: string, items: number) {
   try {
     const start = items <= 10 ? 0 : items - 10;
@@ -45,7 +56,6 @@ export async function fetchItemsPerCategory(categoryId: string, items: number) {
       .select()
       .eq("categoryId", categoryId)
       .range(start, end);
-
     if (error) {
       throw error;
     }

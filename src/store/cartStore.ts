@@ -58,7 +58,7 @@ const useCartStore = create<CartStore>((set) => ({
         existingItem.newAmount = `KSH ${newAmountNumeric.toLocaleString()}`;
         return { items: updatedItems };
       } else {
-        const newTotal = 1;
+        const newTotal = item.total;
         const numericValue = extractNumericValue(item.amount);
         const newAmountNumeric = numericValue * newTotal;
         const newItem = {

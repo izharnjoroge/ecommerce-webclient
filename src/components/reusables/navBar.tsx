@@ -80,7 +80,7 @@ export default function NavBar() {
               width={80}
               className="h-[40px] w-[40px] rounded-full"
             />
-            <h1 className=" font-bold leading-3 text-[20px]">Metalle Mart</h1>
+            <h1 className=" font-bold leading-3 text-[20px]">Astroune Mart</h1>
           </div>
         </Link>
       </section>

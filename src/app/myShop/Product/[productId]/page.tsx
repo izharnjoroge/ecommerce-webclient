@@ -122,7 +122,7 @@ const handleAddToCart = (product: ProductInterface,items: number) => {
         </div>
 
         {/* Action Buttons */}
-       <div className="flex">
+       <div className="flex p-4 md:p-0">
        {itemInCart ? (
           <Button
             className="w-fit bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-600"

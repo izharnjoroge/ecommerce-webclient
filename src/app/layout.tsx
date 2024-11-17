@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
-            <main className="flex justify-center w-full h-screen bg-white mb-2">
+            <main className="flex justify-center w-full h-screen bg-white">
               <div className="max-w-[1200px] w-full">{children}</div>
             </main>
           </AuthProvider>

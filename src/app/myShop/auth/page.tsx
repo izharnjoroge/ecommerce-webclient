@@ -5,13 +5,13 @@ import SignUp from "@/src/components/reusables/signUp";
 import Lottie from "lottie-react";
 import { useState } from "react";
 import loginLottie from "../../../../public/login.json";
-import { BluetoothConnectedIcon } from "lucide-react";
+
 
 export default function AuthPage() {
   const [login, setLogin] = useState(true);
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center px-5 py-10">
+    <div className="h-screen w-full flex flex-col items-center justify-center px-5 ">
       <div className=" max-w-4xl w-full md:grid md:grid-cols-2 md:gap-8 mb-2">
         <div
           className={`${

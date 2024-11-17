@@ -61,14 +61,14 @@ const CartItem = ({
 }) => (
   <li
     key={item.item_id}
-    className="grid grid-cols-4 md:grid-cols-6 mb-1 md:mb-5 items-end md:items-center gap-x-1 font-[500]"
+    className="grid grid-cols-5 md:grid-cols-6 mb-1 md:mb-5 items-end md:items-center gap-x-1 font-[500]"
   >
-    <div className="flex flex-col md:flex-row col-span-2 md:col-span-3 md:items-center ">
+    <div className="col-span-2 md:col-span-3 md:items-center ">
       <img src={item.image} height={50} width={50} />
       <p className="line-clamp-1">{item.name}</p>
     </div>
     <div>{item.newAmount}</div>
-    <div className="hidden md:flex">
+    <div className="">
       <ItemsToggle
         items={item.total}
         itemId={item.item_id}
@@ -90,10 +90,10 @@ const CartSummary = ({
   total: number;
   checkOut: () => void;
 }) => (
-  <div className="w-full md:w-[400px] flex items-center justify-between mt-5 md:mt-10 bg-gradient-to-r from-purple-600 to-purple-500 p-2 rounded-lg text-white">
+  <div className="w-full md:w-[400px] flex items-center justify-between mt-10 bg-gradient-to-r from-purple-600 to-purple-500 p-2 rounded-lg text-white">
     <div className="flex flex-col items-start mb-3 md:mb-0">
-      <p className="text-lg font-[500]">Total:</p>
-      <p className="text-lg font-bold">KSH {total.toLocaleString()}</p>
+      <p className="text-md md:text-lg font-[500]">Total:</p>
+      <p className="text-md md:text-lg font-bold">KSH {total.toLocaleString()}</p>
     </div>
     <button
       onClick={() => checkOut()}
@@ -152,9 +152,9 @@ export default function Cart() {
         <section>
           <ul className="w-full">
             <div className="grid grid-cols-4 md:grid-cols-6 mb-1 md:mb-5">
-              <div className="col-span-2 md:col-span-3 font-bold">Item</div>
+              <div className="col-span-1 md:col-span-3 font-bold">Item</div>
               <div className="font-bold">Amount</div>
-              <div className="hidden md:flex font-bold">Items</div>
+              <div className="font-bold">Items</div>
               <div className="flex justify-center font-bold">Remove</div>
             </div>
             {items.map((item) => (
